@@ -1,0 +1,13 @@
+# Ludum Dare 43 - Sacrifices must be made
+
+## Idea 003 - Mantis
+
+## Premise
+
+- Labyrinth game where you have to find a mate
+- Playing as the male you will be sacrficed
+- Playing as the female you will bite the head of the male and sacrifice him
+
+
+## Constraints
+- Simple vision?

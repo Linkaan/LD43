@@ -1,0 +1,10 @@
+# Ludum Dare 43 - Sacrifices must be made
+
+## Idea 001 - Energy
+
+## Premise
+
+- A game about balancing 4 energy levels (purple, green, blue and red)
+- You can only block 2 sources of energy drains at a time
+- If one source of energy runs out, it will drain from the others until it's full
+- But if this source of energy is unable to replenish you lose the game

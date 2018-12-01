@@ -1,0 +1,14 @@
+# Ludum Dare 43 - Sacrifices must be made
+
+## Idea 002 - The Chosen One
+
+## Premise
+
+- You have 3 traits that determine how powerful you are (strength, defense and speed (movement and attack???))
+- You fight enemies in waves, these could also have traits which you can choose to buf instead of nerf yourself
+- After every wave, you have to sacrifice one point in one of the traits you have
+
+## Setting
+
+- Based on the [Sacrificial victims of Minotaur](https://en.wikipedia.org/wiki/Sacrificial_victims_of_Minotaur) in a labyrint
+- You play as the hero Theseus (or a deriviate of that name)
