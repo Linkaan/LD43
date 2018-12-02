@@ -16,7 +16,7 @@ public class MantisMove : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        float delta = (Input.mousePosition.x - initMouse.x) * scale;
+        float delta = (Input.mousePosition.x - Camera.main.ViewportToScreenPoint(Vector3.one / 2).x) * scale;
         if (Mathf.Abs(delta) > maxSpeed) delta = Mathf.Abs(delta) / delta * maxSpeed;
         rb.AddForce(Vector3.right * delta);
     }
