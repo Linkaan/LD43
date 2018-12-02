@@ -20,11 +20,14 @@ public class MantisMove : MonoBehaviour {
     Rigidbody2D rb;
     Vector3 initMouse;
     SpriteOutline outline;
+    new SpriteRenderer renderer;
     float tick;
+    bool playedLowEnergySFX;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         outline = GetComponent<SpriteOutline>();
+        renderer = GetComponent<SpriteRenderer>();
         initMouse = Input.mousePosition;
         mantisEnergySlider.maxValue = maxMantisEnergy;
     }
@@ -36,8 +39,14 @@ public class MantisMove : MonoBehaviour {
 
         if (mantisEnergy < maxMantisEnergy * 0.25) {
             outline.color = (int)tick % 2 == 0 ? Color.black : Color.red;
+
+            if (!playedLowEnergySFX) {
+                playedLowEnergySFX = true;
+                GetComponent<SFXPlayer>().PlayLowEnergySFX();
+            }
         } else {
             outline.color = Color.black;
+            playedLowEnergySFX = false;
         }
 
         if (mantisEnergy <= 0) {
@@ -46,10 +55,13 @@ public class MantisMove : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        float delta = (Input.mousePosition.x - Camera.main.ViewportToScreenPoint(Vector3.one / 2).x) * scale;
+        float delta = (Input.mousePosition.x - Camera.main.WorldToScreenPoint(transform.position).x) * scale;
         if (Mathf.Abs(delta) > maxSpeed) delta = Mathf.Abs(delta) / delta * maxSpeed;
         tick += Time.fixedDeltaTime * lowEnergyPulseFreq;
         rb.AddForce(Vector3.right * delta);
+
+        //renderer.flipY = rb.velocity.y < 0;
+        renderer.flipX = delta > 0;
     }
 
     public void GainEnergy(float gain) {        

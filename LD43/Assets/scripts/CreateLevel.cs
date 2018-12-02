@@ -5,7 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class CreateLevel : MonoBehaviour {
 
-    public Tile tile;
+    public Tile dirtTile;
+    public Tile grassTile;
     public int platformGap;
     public int platformOffset;
 
@@ -46,8 +47,13 @@ public class CreateLevel : MonoBehaviour {
                 position1.y = y;
                 position2.y = y;
 
-                tilemap.SetTile(position1, tile);
-                tilemap.SetTile(position2, tile);
+                if (y == -1) {
+                    tilemap.SetTile(position1, grassTile);
+                    tilemap.SetTile(position2, grassTile);   
+                } else {
+                    tilemap.SetTile(position1, dirtTile);
+                    tilemap.SetTile(position2, dirtTile);
+                }
 
                 if ((position1.y + offset) % platformGap == 0) {
 
@@ -61,7 +67,7 @@ public class CreateLevel : MonoBehaviour {
                     for (int x = position1.x + 1; x < position2.x; x++) {
                         if (x == gap || x == gap + 1) continue;
                         Vector3Int position = new Vector3Int(x, position1.y, position1.z);
-                        tilemap.SetTile(position, tile);
+                        tilemap.SetTile(position, grassTile);
                     }
                 }
             }
