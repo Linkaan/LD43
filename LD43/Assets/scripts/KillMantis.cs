@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class KillMantis : MonoBehaviour {
 
+    public GameObject gameOverGO;
+
     void OnTriggerEnter2D(Collider2D col) {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameOverGO.SetActive(true);
     }
 }

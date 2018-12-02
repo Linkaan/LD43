@@ -17,6 +17,12 @@ public class MantisMove : MonoBehaviour {
 
     public Slider mantisEnergySlider;
 
+    public GameObject gameOverGO;
+
+    public bool gameOver;
+    public int mantisDestroyedCount;
+    public float timeAlive;
+
     Rigidbody2D rb;
     Vector3 initMouse;
     SpriteOutline outline;
@@ -33,6 +39,11 @@ public class MantisMove : MonoBehaviour {
     }
 
     void Update() {
+
+        if (!gameOver) {
+            timeAlive = Time.time;    
+        }
+
         mantisEnergy -= energyLoss * Time.deltaTime;
 
         mantisEnergySlider.value = mantisEnergy;
@@ -50,7 +61,7 @@ public class MantisMove : MonoBehaviour {
         }
 
         if (mantisEnergy <= 0) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            gameOverGO.SetActive(true);
         }
     }
 
@@ -64,7 +75,8 @@ public class MantisMove : MonoBehaviour {
         renderer.flipX = delta > 0;
     }
 
-    public void GainEnergy(float gain) {        
+    public void GainEnergy(float gain) {
+        mantisDestroyedCount++;
         mantisEnergy += gain;
         mantisEnergy = Mathf.Min(maxMantisEnergy, mantisEnergy);
     }
