@@ -9,6 +9,9 @@ public class CreateLevel : MonoBehaviour {
     public int platformGap;
     public int platformOffset;
 
+    public MantisMove player;
+    public GameObject mantisPrefab;
+
     Tilemap tilemap;
     int offset;
 
@@ -47,6 +50,13 @@ public class CreateLevel : MonoBehaviour {
                 tilemap.SetTile(position2, tile);
 
                 if ((position1.y + offset) % platformGap == 0) {
+
+                    if ((position1.y + offset) % (platformGap * 3) == 0) {
+                        Vector3Int position = new Vector3Int((position1.x + position2.x) / 2, position1.y, position1.z);
+                        GiveEnergy energyGiver = Instantiate(mantisPrefab, tilemap.CellToWorld(position) + Vector3.up * 1.5f, Quaternion.identity).GetComponent<GiveEnergy>();
+                        energyGiver.player = player;
+                    }
+
                     int gap = Random.Range(position1.x + 1, position2.x - 1);
                     for (int x = position1.x + 1; x < position2.x; x++) {
                         if (x == gap || x == gap + 1) continue;
